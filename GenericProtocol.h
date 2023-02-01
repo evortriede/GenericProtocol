@@ -20,7 +20,7 @@ typedef union
     unsigned int bcast_len : 6;
     byte bcast_data[];
   } bcast;
-  byte data[];
+  byte data[0];
 } FrameType;
 
 class GenericProtocol
