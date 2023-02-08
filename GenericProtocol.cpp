@@ -184,6 +184,8 @@ void GenericProtocol::sendData(void *data, int len)
   byte frameLen=len+2;
   int frameType=0;
 
+  if (monitorMode) return;
+  
   if (prevFrame) 
   {
     if (nextFrame)
