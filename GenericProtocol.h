@@ -49,6 +49,7 @@ class GenericProtocol
     long timeout=1000;
     
     bool monitorMode=false;
+    bool connected=false;
     byte ack_num=0;
     byte frame_num=0;
     void (*sendMethod)(byte *data, int len);

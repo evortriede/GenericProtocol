@@ -135,6 +135,7 @@ void ack(void *data)
 void rst(void *data)
 {
   GenericProtocol *gp=(GenericProtocol*)data;
+  gp->connected=false;
   if (gp->onDisconnect)
   {
     (*gp->onDisconnect)();
@@ -166,6 +167,7 @@ void conn(void *data)
   if (gp->nextFrame)free(gp->nextFrame);
   gp->nextFrame=0;
   gp->prevFrame=0;
+  gp->connected=true;
   if (gp->onConnect)
   {
     (*gp->onConnect)();
@@ -184,7 +186,7 @@ void GenericProtocol::sendData(void *data, int len)
   byte frameLen=len+2;
   int frameType=0;
 
-  if (monitorMode) return;
+  if (monitorMode || !connected) return;
   
   if (prevFrame) 
   {
